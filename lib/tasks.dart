@@ -61,8 +61,10 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> {
   TextEditingController treatmentController = TextEditingController();
+  TextEditingController worthController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
-  void saveTask(treament_title) async {
+  void saveTask(treament_title, worth, date) async {
     String new_task_id = const Uuid().v4();
     String family_id = await loadString('family_id');
 
@@ -95,9 +97,23 @@ class _TaskPageState extends State<TaskPage> {
                                       labelText: 'Treatment',
                                     ),
                                   ),
+                                  TextFormField(
+                                    controller: worthController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Strength Coins',
+                                    ),
+                                  ),
+                                  TextFormField(
+                                    controller: dateController,
+                                    keyboardType: TextInputType.datetime,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Treatment Date',
+                                    ),
+                                  ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        saveTask(treatmentController.text);
+                                        saveTask(treatmentController.text, worthController.text, dateController.text);
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Create')),
