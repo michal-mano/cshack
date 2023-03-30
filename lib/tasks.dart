@@ -61,8 +61,10 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> {
   TextEditingController treatmentController = TextEditingController();
+  TextEditingController worthController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
-  void saveTask(treament_title) async {
+  void saveTask(treament_title, worth, date) async {
     String new_task_id = const Uuid().v4();
     String family_id = await loadString('family_id');
 
@@ -95,9 +97,23 @@ class _TaskPageState extends State<TaskPage> {
                                       labelText: 'Treatment',
                                     ),
                                   ),
+                                  TextFormField(
+                                    controller: worthController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Strength Coins',
+                                    ),
+                                  ),
+                                  TextFormField(
+                                    controller: dateController,
+                                    keyboardType: TextInputType.datetime,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Treatment Date',
+                                    ),
+                                  ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        saveTask(treatmentController.text);
+                                        saveTask(treatmentController.text, worthController.text, dateController.text);
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Create')),
@@ -121,6 +137,16 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
+  bool is_active= false;
+  Color button_color = Colors.blue;
+  void _startTask()
+  {
+  button_color = Colors.red;
+  is_active = true;
+  }
+  void _stopTask(){
+
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -131,6 +157,18 @@ class _TaskCardState extends State<TaskCard> {
              ListTile(
               title: Text('${widget.entry.value["treatment_title"]}'),
             ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: button_color,
+              ),
+              onPressed: (){
+                if (is_active) {
+                  _stopTask();
+                } else {
+                  _startTask();
+                }
+              },
+              child: Text("Start"))
           ],
         )
       )
