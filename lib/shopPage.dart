@@ -55,9 +55,13 @@ class _ShopItemState extends State<ShopItem> {
        child: Column (
        mainAxisAlignment: MainAxisAlignment.center,
        children: [
+         Image.asset('lib/klik.webp',
+         height:80),
           Text(widget.item),
-          Text('\$${widget.price}'),
-          TextButton(
+          Text('\$${widget.price}',
+          style: const TextStyle(fontSize: 20)
+          ),
+          ElevatedButton(
               onPressed: _flag ? null : _buyItem,
               child: const Text("Buy")
           )

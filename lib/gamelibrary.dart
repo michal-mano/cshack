@@ -16,7 +16,7 @@ class _GamesPageState extends State<GamesPage> {
       body: GridView.count(
         crossAxisCount: 2,
         children: [IconButton(
-          icon: Image.asset('lib/bird.png'),
+          icon: Image.asset('lib/game/images/bird.png'),
           onPressed: (){
             Navigator.push(
               context,
