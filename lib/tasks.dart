@@ -143,7 +143,7 @@ class _TaskCardState extends State<TaskCard> {
             ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: button_color;
+                primary: button_color,
               )
               onPressed: (){
                 if (is_active) {
