@@ -1,4 +1,5 @@
 import 'package:cshack/globals.dart';
+import 'package:cshack/utils.dart';
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatefulWidget {
@@ -17,17 +18,66 @@ class _ShopPageState extends State<ShopPage> {
       appBar: MyAppBar(widget.title),
       body: GridView.count(
         crossAxisCount: 2,
-        children: [ShopItem(item: "קליק", price: 100)],
+        children: [
+          ShopItem(item: "קליק", price: 100, imageSrc: 'lib/klik.webp'),
+          ShopItem(
+              item: "שדרוג רועי",
+              price: 50,
+              imageSrc: 'lib/game/images/roee_with_hat.png',
+              onPressed: () {
+                roeeWithHat = true;
+                saveString('roeeWithHat', "true");
+              }),
+          ShopItem(
+              item: "סער",
+              price: 50,
+              imageSrc: 'lib/game/images/saar.png',
+              onPressed: () {
+                saarRegular = true;
+                saveString('saarRegular', "true");
+              }),
+          ShopItem(
+              item: "שדרוג סער",
+              price: 50,
+              imageSrc: 'lib/game/images/saar_with_hat.png',
+              onPressed: () {
+                saarWithHat = true;
+                saveString('saarWithHat', "true");
+              }),
+          ShopItem(
+              item: "מיכל",
+              price: 50,
+              imageSrc: 'lib/game/images/michal.png',
+              onPressed: () {
+                michalRegular = true;
+                saveString('michalRegular', "true");
+              }),
+          ShopItem(
+              item: "מיכל שדרוג",
+              price: 50,
+              imageSrc: 'lib/game/images/michal_with_hat.png',
+              onPressed: () {
+                michalWithHat = true;
+                saveString('michalWithHat', "true");
+              }),
+        ],
       ),
     );
   }
 }
 
 class ShopItem extends StatefulWidget {
-  const ShopItem({super.key, required this.item, required this.price});
+  const ShopItem(
+      {super.key,
+      required this.item,
+      required this.price,
+      required this.imageSrc,
+      onPressed});
 
   final String item;
   final int price;
+  final String imageSrc;
+  final onPressed = null;
 
   @override
   State<ShopItem> createState() => _ShopItemState();
@@ -52,11 +102,17 @@ class _ShopItemState extends State<ShopItem> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('lib/klik.webp', height: 80),
+            Image.asset(widget.imageSrc, height: 80),
             Text(widget.item),
             Text('\$${widget.price}', style: const TextStyle(fontSize: 20)),
             ElevatedButton(
-                onPressed: _flag ? null : _buyItem, child: const Text("Buy"))
+                onPressed: () {
+                  _flag ? null : _buyItem();
+                  if (widget.onPressed != null) {
+                    widget.onPressed();
+                  }
+                },
+                child: const Text("Buy"))
           ],
         ));
   }
