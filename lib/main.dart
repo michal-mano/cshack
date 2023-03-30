@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'PersistentTabBar.dart';
 import 'tasks.dart';
 import './game/flappyMain.dart';
+import 'database_manager.dart';
 void main() {
   runApp(const MyApp());
 }
