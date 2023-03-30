@@ -28,6 +28,10 @@ class _flappyHomePageState extends State<flappyHomePage> {
   static double barrierWidth = 0.5;
   List<List<double>> barrierHeight = [[0.4,0.6],[0.6,0.4]];
 
+  int score = 0;
+  int highScore = 0;
+  int columnToClaim = 0;
+
 
 
 //D==0, U==1
@@ -40,7 +44,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
 
   //bird is dead, I killed him, I killed him
   bool birdIsDead(){
-    //return false; this is when roee plays
+    //return false; //this is when roee plays
     if(birdYaxis > 1 || birdYaxis < -1){
       return true;
     }
@@ -61,7 +65,8 @@ class _flappyHomePageState extends State<flappyHomePage> {
       time = 0;
       initialHeight = birdYaxis;
       barrierX = [2,3.5];
-
+      highScore = highScore > score ? highScore : score;
+      score = 0;
     });
   }
 
@@ -101,6 +106,15 @@ class _flappyHomePageState extends State<flappyHomePage> {
     });
   }
 
+  void keepScore(){
+    if(barrierX[columnToClaim] <= birdWidth &&  barrierX[columnToClaim] > -1){
+      columnToClaim = columnToClaim == 0 ? 1:0;
+      setState(() {
+        score++;
+      });
+    }
+  }
+
   void startGame() {
     gameHasStarted = true;
     Timer.periodic(Duration(milliseconds: 60), (timer) {
@@ -111,7 +125,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
       });
       setState(() {
         if ( barrierX[0] < -2){
-          barrierX[0] +=3.2;
+          barrierX[0] +=3;
         }
         else{
           barrierX[0] -= 0.05;
@@ -119,7 +133,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
       });
       setState(() {
         if ( barrierX[1] < -2){
-          barrierX[1] +=3.2;
+          barrierX[1] +=3;
         }
         else{
           barrierX[1] -= 0.05;
@@ -130,6 +144,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
         gameHasStarted = false;
         _showDialog();
       }
+      keepScore();
 
     });
   }
@@ -231,7 +246,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text("0",
+                      Text(score.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 35)),
                     ],
                   ),
@@ -243,10 +258,22 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text("10",
+                      Text(highScore.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 35)),
                     ],
-                  )
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("ALL TIME",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("0",
+                          style: TextStyle(color: Colors.white, fontSize: 35)),
+                    ],
+                  ),
                 ],
               ),
             ),
