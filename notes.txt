@@ -1,0 +1,9 @@
+Technological Challenges
+1. Interaction between the parent and child's accounts
+2. Insert games and "upgrades" for the games
+3. Conceptual aspects of the app itself - how does the parent assign tasks, what are the tasks, what are the sub-tasks (driving, waiting)
+  a) how many points is each task worth (small, medium, large prize)
+  b) general assignments - maybe the child assigns themselves basic tasks
+  c)the parent can also add assignments
+  d) the store - combines both the parent store and the virtual store
+  e) child sees: the store, task completion screen. The parent sees: child screens + assign tasks and edit store
