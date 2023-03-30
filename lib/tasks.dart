@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'utils.dart';
 import 'globals.dart';
@@ -13,23 +14,37 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  Future<String> fetchTasks() async {
+  Future<Object?> fetchTasks() async {
     String family_id = await loadString('family_id');
-    var data = DatabaseManager().database.ref("groups/$family_id/tasks/").get();
+    var data =
+        await DatabaseManager().database.ref("groups/$family_id/tasks/").get();
     print("received data: $data");
-    await Future.delayed(const Duration(seconds: 2));
-    return 'Hello, World!';
+    return data.value;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: fetchTasks(),
-        builder: (context, AsyncSnapshot<String> snapshot) {
+        builder: (context, AsyncSnapshot<Object?> snapshot) {
           if (snapshot.hasData) {
-            return Text("text");
+            Map<dynamic, dynamic> data = snapshot.data as Map<dynamic, dynamic>;
+            List<Widget> textWidgets = data.entries
+                .map((entry) => TaskCard(entry: entry))
+                .toList();
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: textWidgets,
+              ),
+            );
           } else {
-            return Text("Data received!");
+            return const Text(
+              "NO DATA",
+              textAlign: TextAlign.center,
+            );
           }
         });
   }
@@ -97,3 +112,30 @@ class _TaskPageState extends State<TaskPage> {
                 ));
   } //close parent builder
 } //close class
+
+class TaskCard extends StatefulWidget {
+  const TaskCard({super.key, required this.entry});
+  final dynamic entry;
+
+  @override
+  State<TaskCard> createState() => _TaskCardState();
+
+}
+
+class _TaskCardState extends State<TaskCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+             ListTile(
+              title: Text('${widget.entry.value["treatment_title"]}'),
+            ),
+          ],
+        )
+      )
+    );
+  }
+}
