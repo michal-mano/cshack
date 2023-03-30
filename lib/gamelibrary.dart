@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import './game/flappyMain.dart';
+import 'globals.dart';
+
+
 class GamesPage extends StatefulWidget {
   const GamesPage({super.key, required this.title});
 
@@ -13,6 +16,7 @@ class _GamesPageState extends State<GamesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(widget.title),
       body: GridView.count(
         crossAxisCount: 2,
         children: [IconButton(
