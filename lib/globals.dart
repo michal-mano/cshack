@@ -5,6 +5,12 @@ int highestScore = 0;
 int power1 = 0;
 int power2 = 0;
 int strengthCoins = 0;
+bool saarRegular = false;
+bool saarWithHat = false;
+bool roeeRegular = false;
+bool roeeWithHat = false;
+bool michalRegular = false;
+bool michalWithHat = false;
 
 AppBar MyAppBar(title) {
   return AppBar(

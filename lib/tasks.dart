@@ -5,7 +5,6 @@ import 'globals.dart';
 import 'package:uuid/uuid.dart';
 import 'database_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'dart:async';
 
 class TaskList extends StatefulWidget {
   const TaskList({Key? key}) : super(key: key);
@@ -62,8 +61,10 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> {
   TextEditingController treatmentController = TextEditingController();
+  TextEditingController worthController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
-  void saveTask(treament_title) async {
+  void saveTask(treament_title, worth, date) async {
     String new_task_id = const Uuid().v4();
     String family_id = await loadString('family_id');
 
@@ -96,9 +97,23 @@ class _TaskPageState extends State<TaskPage> {
                                       labelText: 'Treatment',
                                     ),
                                   ),
+                                  TextFormField(
+                                    controller: worthController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Strength Coins',
+                                    ),
+                                  ),
+                                  TextFormField(
+                                    controller: dateController,
+                                    keyboardType: TextInputType.datetime,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Treatment Date',
+                                    ),
+                                  ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        saveTask(treatmentController.text);
+                                        saveTask(treatmentController.text, worthController.text, dateController.text);
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Create')),
@@ -123,7 +138,15 @@ class TaskCard extends StatefulWidget {
 
 class _TaskCardState extends State<TaskCard> {
   bool is_active= false;
+  Color button_color = Colors.blue;
+  void _startTask()
+  {
+  button_color = Colors.red;
+  is_active = true;
+  }
+  void _stopTask(){
 
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -134,120 +157,21 @@ class _TaskCardState extends State<TaskCard> {
              ListTile(
               title: Text('${widget.entry.value["treatment_title"]}'),
             ),
-          const TimerWidget(),
-
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: button_color,
+              ),
+              onPressed: (){
+                if (is_active) {
+                  _stopTask();
+                } else {
+                  _startTask();
+                }
+              },
+              child: Text("Start"))
           ],
         )
       )
     );
-  }
-}
-
-class TimerWidget extends StatefulWidget {
-  const TimerWidget({super.key});
-
-  @override
-  State<TimerWidget> createState() => _TimerWidgetState();
-}
-
-class _TimerWidgetState extends State<TimerWidget> {
-  int _seconds = 0;
-  int _minutes = 0;
-  int _hours = 0;
-  bool _isRunning = false;
-  Timer? _timer;
-  Color button_color = Colors.blue;
-
-  void _stopTimer(){
-    setState(() {
-      dispose();
-    });
-  }
-  void _startTimer() {
-    setState(() {
-      button_color = Colors.red;
-      _isRunning = true;
-    });
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_seconds > 0) {
-          _seconds--;
-        } else {
-          if (_minutes > 0) {
-            _minutes--;
-            _seconds = 59;
-          } else {
-            if (_hours > 0) {
-              _hours--;
-              _minutes = 59;
-              _seconds = 59;
-            } else {
-              _isRunning = false;
-              _timer?.cancel();
-            }
-          }
-        }
-      });
-    });
-  }
-
-  void _cancelTimer() {
-    setState(() {
-      _hours = 0;
-      _minutes = 0;
-      _seconds = 0;
-      _isRunning = false;
-    });
-    _timer?.cancel();
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Kindacode.com'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Display remaining time in HH:MM:SS format
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: Colors.amber,
-              child: Center(
-                child: Text(
-                  '${_hours.toString().padLeft(2, '0')}:${_minutes.toString()
-                      .padLeft(2, '0')}:${_seconds.toString().padLeft(2, '0')}',
-                  style: const TextStyle(
-                      fontSize: 60, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: button_color,
-                ),
-                onPressed: (){
-                  if (_isRunning) {
-                    _stopTimer();
-                  } else {
-                    _startTimer();
-                  }
-                },
-                child: Text("Start"))],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    if (_timer != null) {
-      _timer!.cancel();
-    }
-    super.dispose();
   }
 }
