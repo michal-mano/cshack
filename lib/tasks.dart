@@ -137,6 +137,16 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
+  bool is_active= false;
+  Color button_color = Colors.blue;
+  void _startTask()
+  {
+  button_color = Colors.red;
+  is_active = true;
+  }
+  void _stopTask(){
+
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -147,6 +157,18 @@ class _TaskCardState extends State<TaskCard> {
              ListTile(
               title: Text('${widget.entry.value["treatment_title"]}'),
             ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: button_color,
+              )
+              onPressed: (){
+                if (is_active) {
+                  _stopTask();
+                } else {
+                  _startTask();
+                }
+              },
+              child: Text("Start"))
           ],
         )
       )
