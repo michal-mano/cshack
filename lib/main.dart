@@ -14,11 +14,9 @@ void main() async {
   // runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   globalUserType = await loadString('userType');
-  highestScore = (await loadString('highestScore') == "") ? int.parse(await loadString('highestScore') ) : 0;
-  power1 = (await loadString('power1') == "") ? int.parse(await loadString('power1')) : 0;
-  power2 = (await loadString('power2') == "") ? int.parse(await loadString('power2')) : 0;
-
-
+  highestScore = (await loadString('highestScore') != "") ? int.parse(await loadString('highestScore') ) : 0;
+  power1 = (await loadString('power1') != "") ? int.parse(await loadString('power1')) : 0;
+  power2 = (await loadString('power2') != "") ? int.parse(await loadString('power2')) : 0;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

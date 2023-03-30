@@ -14,6 +14,9 @@ class TaskList extends StatefulWidget {
 
 class _TaskListState extends State<TaskList> {
   Future<String> fetchTasks() async {
+    String family_id = await loadString('family_id');
+    var data = DatabaseManager().database.ref("groups/$family_id/tasks/").get();
+    print("received data: $data");
     await Future.delayed(const Duration(seconds: 2));
     return 'Hello, World!';
   }
