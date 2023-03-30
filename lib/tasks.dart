@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'utils.dart';
+import 'globals.dart';
 
 
 class TaskPage extends StatefulWidget {
@@ -23,7 +25,7 @@ class _TaskPageState extends State<TaskPage> {
             child: const Text('Next'),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: globalUserType != USER_TYPE_PARENT ? null : FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {
               showModalBottomSheet(
