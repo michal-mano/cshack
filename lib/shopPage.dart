@@ -1,3 +1,4 @@
+import 'package:cshack/globals.dart';
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatefulWidget {
@@ -13,14 +14,10 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: MyAppBar(widget.title),
       body: GridView.count(
         crossAxisCount: 2,
-        children: [
-          ShopItem(item: "קליק", price: 100)
-        ],
+        children: [ShopItem(item: "קליק", price: 100)],
       ),
     );
   }
@@ -49,25 +46,18 @@ class _ShopItemState extends State<ShopItem> {
 
   @override
   Widget build(BuildContext context) {
-      return Container(
+    return Container(
         color: _widgetColor,
-       padding: const EdgeInsets.all(10.0),
-       child: Column (
-       mainAxisAlignment: MainAxisAlignment.center,
-       children: [
-         Image.asset('lib/klik.webp',
-         height:80),
-          Text(widget.item),
-          Text('\$${widget.price}',
-          style: const TextStyle(fontSize: 20)
-          ),
-          ElevatedButton(
-              onPressed: _flag ? null : _buyItem,
-              child: const Text("Buy")
-          )
-        ],
-      )
-      );
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('lib/klik.webp', height: 80),
+            Text(widget.item),
+            Text('\$${widget.price}', style: const TextStyle(fontSize: 20)),
+            ElevatedButton(
+                onPressed: _flag ? null : _buyItem, child: const Text("Buy"))
+          ],
+        ));
   }
 }
-

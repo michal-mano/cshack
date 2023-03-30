@@ -19,31 +19,36 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Setup')),
-      body: Padding(padding:EdgeInsets.all(16.0), child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: ParentOrChild(),
-          ),
-          TextFormField(
-            controller: _controller,
-            decoration: const InputDecoration(
-              labelText: 'ID Number',
-            ),
-            onSaved: (String? value) {},
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await saveString('family_id', _controller.text);
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MyHomePage()),
-              );
-            },
-            child: const Text('Submit'),
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Setup'),
       ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Center(
+              child: ParentOrChild(),
+            ),
+            TextFormField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: 'ID Number',
+              ),
+              onSaved: (String? value) {},
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await saveString('family_id', _controller.text);
+                globalFamilyId = _controller.text;
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -74,9 +74,7 @@ class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+        appBar: MyAppBar(widget.title),
         body: const TaskList(),
         floatingActionButton: globalUserType != USER_TYPE_PARENT
             ? null
