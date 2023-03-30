@@ -1,19 +1,26 @@
 import 'package:cshack/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'tasks.dart';
 import './game/flappyMain.dart';
 import 'utils.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 import 'globals.dart';
+import 'database_manager.dart';
+import 'firebase_options.dart';
 
 void main() async {
   // runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
-  globalUserType = await loadString('UID');
+  globalUserType = await loadString('userType');
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(MyApp(
-    initialRoute: globalUserType.isEmpty ? '/setUID' : '/',
+    initialRoute: globalUserType == "" ? '/loginScreen' : '/',
   ));
 }
 
@@ -43,7 +50,7 @@ class MyApp extends StatelessWidget {
       initialRoute: initialRoute,
       routes: {
         '/': (context) => const MyHomePage(),
-        '/setUID': (context) => const LoginPage(title: "login peepoo"),
+        '/loginScreen': (context) => const LoginPage(title: "login peepoo"),
       },
     );
   }

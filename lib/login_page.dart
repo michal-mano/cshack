@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Setup')),
-      body: Column(
+      body: Padding(padding:EdgeInsets.all(16.0), child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Center(
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await saveString('UID', _controller.text);
+              await saveString('family_id', _controller.text);
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyHomePage()),
               );
@@ -43,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
             child: const Text('Submit'),
           ),
         ],
+      ),
       ),
     );
   }
@@ -84,7 +85,7 @@ class _ParentOrChildState extends State<ParentOrChild> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
         CustomRadioButton(USER_TYPE_CHILD, 1),
         CustomRadioButton(USER_TYPE_PARENT, 2)

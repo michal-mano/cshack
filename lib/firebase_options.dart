@@ -57,6 +57,7 @@ class DefaultFirebaseOptions {
     appId: '1:824875981409:android:dc11a0ec1519681514e820',
     messagingSenderId: '824875981409',
     projectId: 'project-team-whatsapp',
+    databaseURL: 'https://project-team-whatsapp-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'project-team-whatsapp.appspot.com',
   );
 }
