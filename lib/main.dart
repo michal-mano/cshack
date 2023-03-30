@@ -14,6 +14,8 @@ void main() async {
   // runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   globalUserType = await loadString('userType');
+  String highestScoreStr = await loadString('highestScore');
+  highestScore = highestScoreStr == "" ? int.parse(highestScoreStr) : 0;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
