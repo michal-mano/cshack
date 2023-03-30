@@ -68,29 +68,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
-
-// BottomNavigationBar(
-//         currentTab: currentTab.
-//         items: const <BottomNavigationBarItem> [
-//           BottomNavigationBarItem(
-//               icon: Icon(Icons.check_box),
-//               label: 'Tasks',
-//           ),
-//           BottomNavigationBarItem(
-//               icon: Icon(Icons.games),
-//               label: 'Games',
-//           ),
-//           BottomNavigationBarItem(
-//               icon: Icon(Icons.store),
-//               label: 'Store',
-//           ),
-//         ],
-//         currentIndex: _selectedIndex,
-//         selectedItemColor: Colors.amber[800],
-//         onTap: _onItemTapped,
-//       ),
-//       // This trailing comma makes auto-formatting nicer for build methods.
-//

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "824875981409",
+    "firebase_url": "https://project-team-whatsapp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "project-team-whatsapp",
+    "storage_bucket": "project-team-whatsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824875981409:android:dc11a0ec1519681514e820",
+        "android_client_info": {
+          "package_name": "com.example.cshack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824875981409-pa56qh4egnkna65q50pa6jie9uqq5ht3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoJVV77_Avr8UEVTye_zdbjCHNYSOgWRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824875981409-pa56qh4egnkna65q50pa6jie9uqq5ht3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
