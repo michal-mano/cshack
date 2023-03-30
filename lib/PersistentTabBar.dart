@@ -1,9 +1,9 @@
-import 'package:cshack/loginPage.dart';
+import 'package:cshack/login_page.dart';
 import 'package:cshack/tasks.dart';
 import 'package:flutter/material.dart';
 import './game/flappyMain.dart';
 import 'gamelibrary.dart';
-import 'loginPage.dart';
+import 'login_page.dart';
 
 class PersistentTabBar extends StatelessWidget {
   const PersistentTabBar({super.key});

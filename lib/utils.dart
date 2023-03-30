@@ -9,3 +9,6 @@ Future<String> loadString(String key) async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getString(key) ?? '';
 }
+
+const String USER_TYPE_CHILD = "Child";
+const String USER_TYPE_PARENT = "Parent";
