@@ -5,6 +5,33 @@ import 'package:uuid/uuid.dart';
 import 'database_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+class TaskList extends StatefulWidget {
+  const TaskList({Key? key}) : super(key: key);
+
+  @override
+  State<TaskList> createState() => _TaskListState();
+}
+
+class _TaskListState extends State<TaskList> {
+  Future<String> fetchTasks() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return 'Hello, World!';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: fetchTasks(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            return Text("text");
+          } else {
+            return Text("Data received!");
+          }
+        });
+  }
+}
+
 class TaskPage extends StatefulWidget {
   const TaskPage({super.key, required this.title});
 
@@ -32,12 +59,7 @@ class _TaskPageState extends State<TaskPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-          child: TextButton(
-            onPressed: () {},
-            child: const Text('Next'),
-          ),
-        ),
+        body: const TaskList(),
         floatingActionButton: globalUserType != USER_TYPE_PARENT
             ? null
             : FloatingActionButton(
@@ -47,7 +69,7 @@ class _TaskPageState extends State<TaskPage> {
                       context: context,
                       builder: (BuildContext context) {
                         return Container(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Form(
                               child: Column(
                                 children: [
