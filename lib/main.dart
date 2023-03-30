@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'PersistentTabBar.dart';
 import 'tasks.dart';
 import './game/flappyMain.dart';
+import 'utils.dart'
+
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  String? uid = await loadString('UID');
+
+  runApp(MyApp(
+    initialRoute: uid.isEmpty ? '/setUID' : '/',
+  ));
 }
 
 class MyApp extends StatelessWidget {
+/*
   const MyApp({super.key});
   // This widget is the root of your application.
   @override
@@ -17,6 +25,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Home'),
+    );
+  }
+*/
+
+  final String initialRoute;
+
+  const MyApp({Key? key, required this.initialRoute}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: initialRoute,
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/setUID': (context) => const SetUIDScreen(),
+      },
     );
   }
 }
