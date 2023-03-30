@@ -1,5 +1,6 @@
 import 'package:cshack/tasks.dart';
 import 'package:flutter/material.dart';
+import './game/flappyMain.dart';
 
 class PersistentTabBar extends StatelessWidget {
   const PersistentTabBar({super.key});
@@ -24,7 +25,7 @@ class PersistentTabBar extends StatelessWidget {
         body: TabBarView(
           children: [
             TaskPage(title: "Tasks"),
-            TaskPage(title:"Games"),
+            flappy(),
             TaskPage(title: "Store")
           ],
         ),
