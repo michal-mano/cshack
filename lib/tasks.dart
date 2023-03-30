@@ -30,11 +30,8 @@ class _TaskListState extends State<TaskList> {
           if (snapshot.hasData) {
             Map<dynamic, dynamic> data = snapshot.data as Map<dynamic, dynamic>;
             List<Widget> textWidgets = data.entries
-                .map((entry) => Text('${entry.key}: ${entry.value}'))
+                .map((entry) => TaskCard(entry: entry))
                 .toList();
-
-            return Card()
-
             return Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
               child: Column(
@@ -115,3 +112,30 @@ class _TaskPageState extends State<TaskPage> {
                 ));
   } //close parent builder
 } //close class
+
+class TaskCard extends StatefulWidget {
+  const TaskCard({super.key, required this.entry});
+  final dynamic entry;
+
+  @override
+  State<TaskCard> createState() => _TaskCardState();
+
+}
+
+class _TaskCardState extends State<TaskCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+             ListTile(
+              title: Text('${widget.entry.value?.treatment_title}'),
+            ),
+          ],
+        )
+      )
+    );
+  }
+}
