@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'database_manager.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key, required this.title});
@@ -12,7 +11,7 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
   @override
-  Widget build(BuildContext context) async{
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -20,20 +19,51 @@ class _ShopPageState extends State<ShopPage> {
       body: GridView.count(
         crossAxisCount: 2,
         children: [
-          ShopItem(item)
+          ShopItem(item: "קליק", price: 100)
         ],
       ),
     );
   }
 }
 
-class ShopItem extends StatelessWidget {
-  const ShopItem({super.key, required this.item});
+class ShopItem extends StatefulWidget {
+  const ShopItem({super.key, required this.item, required this.price});
+
   final String item;
+  final int price;
+
+  @override
+  State<ShopItem> createState() => _ShopItemState();
+}
+
+class _ShopItemState extends State<ShopItem> {
+  bool _flag = false;
+  Color _widgetColor = Colors.white;
+
+  void _buyItem() {
+    setState(() {
+      _flag = true;
+      _widgetColor = Colors.green;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    );
+      return Container(
+        color: _widgetColor,
+       padding: const EdgeInsets.all(10.0),
+       child: Column (
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: [
+          Text(widget.item),
+          Text('\$${widget.price}'),
+          TextButton(
+              onPressed: _flag ? null : _buyItem,
+              child: const Text("Buy")
+          )
+        ],
+      )
+      );
   }
 }
 
