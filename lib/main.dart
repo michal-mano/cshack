@@ -17,6 +17,7 @@ void main() async {
   highestScore = (await loadString('highestScore') != "") ? int.parse(await loadString('highestScore') ) : 0;
   power1 = (await loadString('power1') != "") ? int.parse(await loadString('power1')) : 0;
   power2 = (await loadString('power2') != "") ? int.parse(await loadString('power2')) : 0;
+  strengthCoins = (await loadString('strengthCoins') != "") ? int.parse(await loadString('strengthCoins')) : 0;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

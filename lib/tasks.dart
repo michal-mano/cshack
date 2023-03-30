@@ -131,7 +131,7 @@ class _TaskCardState extends State<TaskCard> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
              ListTile(
-              title: Text('${widget.entry.value?.treatment_title}'),
+              title: Text('${widget.entry.value["treatment_title"]}'),
             ),
           ],
         )
