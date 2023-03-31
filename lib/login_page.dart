@@ -91,6 +91,7 @@ class _ParentOrChildState extends State<ParentOrChild> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         CustomRadioButton(USER_TYPE_CHILD, 1),
         CustomRadioButton(USER_TYPE_PARENT, 2)
