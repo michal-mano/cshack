@@ -167,8 +167,16 @@ class _TaskCardState extends State<TaskCard> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
-          title: Text('${widget.entry.value["treatment_title"]}'),
+          title: Text(
+            '${widget.entry.value["treatment_title"]}',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 35),
+          ),
         ),
+        Row(mainAxisAlignment:MainAxisAlignment.center, children: [
+          Text(widget.entry.value["worth"], style: TextStyle(fontSize: 25)),
+          Icon(Icons.build_circle),
+        ]),
         TimerWidget(id: widget.id, worth: widget.entry.value["worth"]),
       ],
     )));
