@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './game/flappyMain.dart';
 import 'globals.dart';
+import './game/paci.dart';
 
 
 class GamesPage extends StatefulWidget {

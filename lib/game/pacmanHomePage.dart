@@ -264,7 +264,7 @@ class _pacmanHomePageState extends State<pacmanHomePage> {
                   onTap: startGame,
                   child: Text(
                     "P L A Y",
-                    style: TextStyle(color: Colors.grey[300], fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
