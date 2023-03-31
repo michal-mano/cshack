@@ -27,6 +27,14 @@ class _GamesPageState extends State<GamesPage> {
               MaterialPageRoute(builder:(context) => const flappy()),
             );
           },
+        ),IconButton(
+          icon: Image.asset('lib/pacman.png'),
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder:(context) => const paci()),
+            );
+          },
         )],
       )
     );

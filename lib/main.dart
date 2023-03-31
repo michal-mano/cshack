@@ -19,6 +19,11 @@ void main() async {
   power1 = (await loadString('power1') != "") ? int.parse(await loadString('power1')) : 0;
   power2 = (await loadString('power2') != "") ? int.parse(await loadString('power2')) : 0;
   strengthCoins = (await loadString('strengthCoins') != "") ? int.parse(await loadString('strengthCoins')) : 0;
+  roeeWithHat = (await loadString('roeeWithHat') == "true") ? true : false;
+  saarRegular = (await loadString('saarRegular') == "true") ? true : false;
+  saarWithHat = (await loadString('saarWithHat') == "true") ? true : false;
+  michalRegular = (await loadString('michalRegular') == "true") ? true : false;
+  michalWithHat = (await loadString('michalWithHat') == "true") ? true : false;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
