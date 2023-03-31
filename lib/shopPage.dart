@@ -45,21 +45,18 @@ class _ShopPageState extends State<ShopPage> {
                 saveString('saarWithHat', "true");
               }),
           ShopItem(
-              item: "שחקן מיכל",
+              item: "שדרוג מיכל",
               price: 50,
-              imageSrc: 'lib/game/images/michal.png',
+              imageSrc: 'lib/game/images/michal_with_hat.png',
               onPressed: () {
                 michalRegular = true;
                 saveString('michalRegular', "true");
               }),
           ShopItem(
-              item: "מיכל שדרוג",
-              price: 50,
-              imageSrc: 'lib/game/images/michal_with_hat.png',
-              onPressed: () {
-                michalWithHat = true;
-                saveString('michalWithHat', "true");
-              }),
+            item: "שדרוג האט זמן",
+            price: 80,
+            imageSrc: 'lib/powerup.png',
+          ),
         ],
       ),
     );
