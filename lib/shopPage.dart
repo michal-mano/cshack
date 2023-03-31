@@ -29,7 +29,7 @@ class _ShopPageState extends State<ShopPage> {
                 saveString('roeeWithHat', "true");
               }),
           ShopItem(
-              item: "סער",
+              item: "שחקן סער",
               price: 50,
               imageSrc: 'lib/game/images/saar.png',
               onPressed: () {
@@ -45,7 +45,7 @@ class _ShopPageState extends State<ShopPage> {
                 saveString('saarWithHat', "true");
               }),
           ShopItem(
-              item: "מיכל",
+              item: "שחקן מיכל",
               price: 50,
               imageSrc: 'lib/game/images/michal.png',
               onPressed: () {
