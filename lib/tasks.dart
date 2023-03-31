@@ -48,9 +48,16 @@ class _TaskListState extends State<TaskList> {
               ),
             );
           } else {
-            return const Text(
-              "NO DATA",
-              textAlign: TextAlign.center,
+            return Container(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                child: const Text(
+                  "Loading...",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
             );
           }
         });
@@ -126,6 +133,11 @@ class _TaskPageState extends State<TaskPage> {
                                             worthController.text,
                                             dateController.text);
                                         Navigator.pop(context);
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PersistentTabBar()),
+                                        );
                                       },
                                       child: const Text('Create')),
                                 ],
@@ -173,7 +185,7 @@ class _TaskCardState extends State<TaskCard> {
             style: TextStyle(fontSize: 35),
           ),
         ),
-        Row(mainAxisAlignment:MainAxisAlignment.center, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(widget.entry.value["worth"], style: TextStyle(fontSize: 25)),
           Icon(Icons.build_circle),
         ]),
