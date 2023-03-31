@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'dart:math';
+import 'package:cshack/globals.dart';
+import 'package:cshack/utils.dart';
 import 'package:cshack/game/barriers.dart';
 import 'package:flutter/material.dart';
 import 'bird.dart';
@@ -32,6 +34,16 @@ class _flappyHomePageState extends State<flappyHomePage> {
   int highScore = 0;
   int columnToClaim = 0;
 
+  // superPower: 1: ghost, 2: slowmo
+
+  bool ghost = false;
+  bool slowmo = false;
+  bool activeGhost = false;
+  int currentScoreSlowmo = -5;
+  int currentScoreGhost = -8;
+
+  int birdNum = Random().nextInt(7);
+
 
 
 //D==0, U==1
@@ -45,6 +57,8 @@ class _flappyHomePageState extends State<flappyHomePage> {
   //bird is dead, I killed him, I killed him
   bool birdIsDead(){
     //return false; //this is when roee plays
+    if(ghost)
+        return false;
     if(birdYaxis > 1 || birdYaxis < -1){
       return true;
     }
@@ -66,6 +80,9 @@ class _flappyHomePageState extends State<flappyHomePage> {
       initialHeight = birdYaxis;
       barrierX = [2,3.5];
       highScore = highScore > score ? highScore : score;
+      if(highestScore < highScore ){
+        saveString('highestScore' ,highScore.toString());
+      }
       score = 0;
     });
   }
@@ -115,12 +132,31 @@ class _flappyHomePageState extends State<flappyHomePage> {
     }
   }
 
+  void checkPowers(){
+    if(score - currentScoreGhost < 8){
+      ghost = true;
+    }
+    else{
+      ghost =false;
+    }
+    if(score - currentScoreSlowmo < 5){
+      slowmo = true;
+    }
+    else{
+      slowmo = false;
+    }
+
+  }
+
   void startGame() {
     gameHasStarted = true;
     Timer.periodic(Duration(milliseconds: 60), (timer) {
       time += 0.05;
       height = -3.5 * time * time + 2 * time; //2.8 is initial y velocity
       setState(() {
+        if(slowmo){
+          birdYaxis = initialHeight - height/2;
+        }
         birdYaxis = initialHeight - height;
       });
       setState(() {
@@ -128,7 +164,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
           barrierX[0] +=3;
         }
         else{
-          barrierX[0] -= 0.05;
+          barrierX[0] = slowmo? barrierX[0]- 0.025: barrierX[0]-0.05;
         }
       });
       setState(() {
@@ -136,7 +172,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
           barrierX[1] +=3;
         }
         else{
-          barrierX[1] -= 0.05;
+          barrierX[1] = slowmo? barrierX[1]- 0.025: barrierX[1]-0.05;
         }
       });
       if (birdIsDead()) {
@@ -145,6 +181,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
         _showDialog();
       }
       keepScore();
+      checkPowers();
 
     });
   }
@@ -174,6 +211,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       birdY: birdYaxis,
                       birdHeight: birdHeight,
                       birdWidth: birdWidth,
+                      birdNum: birdNum,
                   ),
                 ),
                 Container(
@@ -244,22 +282,26 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       Text("SCORE",
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Text(score.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 35)),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("BEST",
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                          style: TextStyle(color: Colors.white, fontSize: 35)
+                      ),
                       SizedBox(
                         height: 20,
                       ),
-                      Text(highScore.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 35)),
+                      /*TextButton(style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                        ),
+                          onPressed: (){
+                        if(power1 >= -100 ){
+                          currentScoreSlowmo = score;
+                          power1--;
+                          saveString('power2' ,power2.toString());
+                        }
+                      }, child: Text("slowmo:"+power1.toString(),
+                            style: TextStyle(fontSize: 30),)
+                      )*/
                     ],
                   ),
                   Column(
@@ -268,18 +310,63 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       Text("ALL TIME",
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
-                      Text("0",
+                      Text(highestScore.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 35)),
+                      SizedBox(
+                        height: 20,
+                      )
                     ],
                   ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("BEST",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(highScore.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 35)),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      /*TextButton(style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                        ),
+                          onPressed: (){
+                        if(power2 > -1000){
+                          currentScoreGhost = score;
+                          power2--;
+                          saveString('power2' ,power2.toString());
+                        }
+                        },
+                          child: Text("Ghost:" + power2.toString() ,
+                            style: TextStyle(fontSize: 30),)
+                      )*/
+                    ],
+                  ),
+
                 ],
               ),
             ),
           ),
         ],
-      )),
+      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if(power2 > 0){
+              currentScoreSlowmo = score;
+              power2--;
+              saveString('power2' ,power2.toString());
+            }
+          },
+        backgroundColor: Colors.green,
+          //child: const Icon(Icons.navigation),
+          child: Text(power2.toString())
+      ),
+      ),
     );
   }
 }
