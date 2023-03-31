@@ -81,7 +81,8 @@ class _flappyHomePageState extends State<flappyHomePage> {
       barrierX = [2,3.5];
       highScore = highScore > score ? highScore : score;
       if(highestScore < highScore ){
-        saveString('highestScore' ,highScore.toString());
+        highestScore = highScore;
+        saveString('highestScore', highScore.toString());
       }
       score = 0;
     });

@@ -75,6 +75,7 @@ class MyBird extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    List<bool> birdsBool = [saarRegular, roeeRegular, michalRegular, saarWithHat, roeeWithHat, michalWithHat, true];
     return Container(
       alignment: Alignment(0,(2 * birdY + birdHeight) / (2 - birdHeight)),
       child: Image.asset(

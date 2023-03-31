@@ -69,12 +69,12 @@ class ShopItem extends StatefulWidget {
       required this.item,
       required this.price,
       required this.imageSrc,
-      onPressed});
+      this.onPressed});
 
   final String item;
   final int price;
   final String imageSrc;
-  final onPressed = null;
+  final onPressed;
 
   @override
   State<ShopItem> createState() => _ShopItemState();
