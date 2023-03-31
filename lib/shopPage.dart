@@ -56,6 +56,10 @@ class _ShopPageState extends State<ShopPage> {
             item: "שדרוג האט זמן",
             price: 80,
             imageSrc: 'lib/powerup.png',
+            onPressed: () {
+              power1++;
+              power2++;
+            }
           ),
         ],
       ),

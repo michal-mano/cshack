@@ -14,6 +14,7 @@ bool michalWithHat = false;
 
 AppBar MyAppBar(title) {
   return AppBar(
+    toolbarHeight: 75,
     title: Text(title),
     actions: [
       Container(
