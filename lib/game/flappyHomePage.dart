@@ -151,7 +151,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
 
   void startGame() {
     gameHasStarted = true;
-    Timer.periodic(Duration(milliseconds: 60), (timer) {
+    Timer.periodic(Duration(milliseconds: 10), (timer) {
       time += 0.05;
       height = -3.5 * time * time + 2 * time; //2.8 is initial y velocity
       setState(() {

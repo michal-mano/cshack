@@ -105,7 +105,7 @@ class _ShopItemState extends State<ShopItem> {
           children: [
             Image.asset(widget.imageSrc, height: 80),
             Text(widget.item),
-            Text('\$${widget.price}', style: const TextStyle(fontSize: 20)),
+            Row(mainAxisAlignment:MainAxisAlignment.center, children:[Icon(Icons.build_circle), Text('${widget.price}', style: const TextStyle(fontSize: 20))]),
             ElevatedButton(
                 onPressed: () {
                   _flag ? null : _buyItem();

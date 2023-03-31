@@ -283,7 +283,7 @@ class _TimerWidgetState extends State<TimerWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Display remaining time in HH:MM:SS format
-          Container(
+          _isRunning ? Container(
             color: Colors.amber,
             child: Center(
               child: Text(
@@ -292,7 +292,7 @@ class _TimerWidgetState extends State<TimerWidget> {
                     const TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
+          ) : Container(),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: button_color,
