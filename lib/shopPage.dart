@@ -56,6 +56,10 @@ class _ShopPageState extends State<ShopPage> {
             item: "שדרוג האט זמן",
             price: 80,
             imageSrc: 'lib/powerup.png',
+            onPressed: () {
+              power1++;
+              power2++;
+            }
           ),
         ],
       ),
@@ -101,7 +105,7 @@ class _ShopItemState extends State<ShopItem> {
           children: [
             Image.asset(widget.imageSrc, height: 80),
             Text(widget.item),
-            Text('\$${widget.price}', style: const TextStyle(fontSize: 20)),
+            Row(mainAxisAlignment:MainAxisAlignment.center, children:[Icon(Icons.build_circle), Text('${widget.price}', style: const TextStyle(fontSize: 20))]),
             ElevatedButton(
                 onPressed: () {
                   _flag ? null : _buyItem();

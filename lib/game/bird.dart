@@ -9,7 +9,7 @@ class MyBird extends StatelessWidget {
   final birdNum;
 
   List<String> birds = ['lib/game/images/saar.png','lib/game/images/saar.png', 'lib/game/images/michal.png'
-  ,'lib/game/images/saarwithhat.png','lib/game/images/roee_with_hat.png','lib/game/images/michal_with_hat.png','lib/game/images/bird.png'];
+  ,'lib/game/images/saar_with_hat.png','lib/game/images/roee_with_hat.png','lib/game/images/michal_with_hat.png','lib/game/images/bird.png'];
 
   List<bool> birdsBool = [saarRegular, roeeRegular, michalRegular, saarWithHat, roeeWithHat, michalWithHat, true];
 
@@ -42,7 +42,7 @@ class MyBird extends StatelessWidget {
     }
     else if(birdNum == 4 && saarWithHat){
       return Image.asset(
-          'lib/game/images/saarwithhat.png',
+          'lib/game/images/saar_with_hat.png',
           width: MediaQuery.of(context).size.height*birdWidth /2,
           height: MediaQuery.of(context).size.height * 3 / 4 * birdHeight /2,
           fit: BoxFit.fill
