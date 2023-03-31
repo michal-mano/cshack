@@ -42,7 +42,7 @@ class MyBird extends StatelessWidget {
     }
     else if(birdNum == 4 && saarWithHat){
       return Image.asset(
-          'lib/game/images/saarwithhat.png',
+          'lib/game/images/saar_with_hat.png',
           width: MediaQuery.of(context).size.height*birdWidth /2,
           height: MediaQuery.of(context).size.height * 3 / 4 * birdHeight /2,
           fit: BoxFit.fill
