@@ -28,11 +28,11 @@ class _GamesPageState extends State<GamesPage> {
             );
           },
         ),IconButton(
-          icon: Image.asset('lib/pacman.png'),
+          icon: Image.asset('lib/pacman.png', scale: 20,),
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder:(context) => const paci()),
+              MaterialPageRoute(builder:(context) => const flappy()),
             );
           },
         )],
