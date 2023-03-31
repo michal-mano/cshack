@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:cshack/globals.dart';
 import 'package:cshack/utils.dart';
 import 'package:cshack/game/barriers.dart';
@@ -41,6 +42,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
   int currentScoreSlowmo = -5;
   int currentScoreGhost = -8;
 
+  int birdNum = Random().nextInt(7);
 
 
 
@@ -54,7 +56,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
 
   //bird is dead, I killed him, I killed him
   bool birdIsDead(){
-    return false; //this is when roee plays
+    //return false; //this is when roee plays
     if(ghost)
         return false;
     if(birdYaxis > 1 || birdYaxis < -1){
@@ -209,6 +211,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
                       birdY: birdYaxis,
                       birdHeight: birdHeight,
                       birdWidth: birdWidth,
+                      birdNum: birdNum,
                   ),
                 ),
                 Container(
@@ -353,7 +356,7 @@ class _flappyHomePageState extends State<flappyHomePage> {
       ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            if(power2 > -1000){
+            if(power2 > 0){
               currentScoreSlowmo = score;
               power2--;
               saveString('power2' ,power2.toString());
